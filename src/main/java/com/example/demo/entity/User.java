@@ -1,14 +1,43 @@
 package com.example.demo.entity;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+
+import javax.persistence.OneToOne;
+
 
 @Entity
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
+	private String name;
+	
+	private int age;
+	@OneToOne (cascade = CascadeType.ALL)
+	@JoinColumn(name= "address_id", referencedColumnName = "id")
+	Address address;
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -17,7 +46,6 @@ public class User {
 		this.id = id;
 	}
 
-	private String name;
 
 	public String getName() {
 		return name;
@@ -26,5 +54,4 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 }
